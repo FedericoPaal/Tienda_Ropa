@@ -217,8 +217,8 @@ button:hover {
 /* ====== HERO ====== */
 .hero {
   position: relative;
-  height: 60vh;
-  min-height: 360px;
+  height: 100vh;
+  width: 188vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,6 +278,6 @@ button:hover {
 
   .hero {
     height: 45vh;
-    min-height: 260px;
+
   }
 }
