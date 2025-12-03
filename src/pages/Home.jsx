@@ -1,8 +1,13 @@
 import React from "react";
+import SEO from "../components/SEO";
 
 export default function Home() {
   return (
     <div className="page">
+      <SEO
+        title="Inicio - Mi E-commerce"
+        description="Bienvenido a Mi E-commerce, la mejor tienda de ropa online."
+      />
       {/* Hero principal */}
       <header className="hero">
         {/* imagen en public/ image.png se sirve desde la raíz */}

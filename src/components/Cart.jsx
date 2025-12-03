@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../contexts/CartContext";
 
-export default function Cart({
-  cart = [],
-  removeFromCart = () => {},
-  clearCart = () => {},
-}) {
+export default function Cart() {
+  const { cart, removeFromCart, clearCart } = useContext(CartContext);
+
   const total = cart
     .reduce((s, p) => s + p.price * (p.quantity || 1), 0)
     .toFixed(2);

@@ -1,33 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ProductContext } from '../contexts/ProductContext';
+import { CartContext } from '../contexts/CartContext';
 
-// Keep this file as plain JS/JSX to match the project's setup.
-export default function ProductDetail({ addToCart }) {
-  const params = useParams();
-  const id = params.id;
+export default function ProductDetail() {
+  const { id } = useParams();
+  const { products, loading, error } = useContext(ProductContext);
+  const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!id) {
-      setError('ID de producto no proporcionado');
-      setLoading(false);
-      return;
+    if (products.length > 0) {
+      const foundProduct = products.find((p) => p.id === parseInt(id, 10));
+      setProduct(foundProduct);
     }
-
-    setLoading(true);
-    setError(null);
-
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => setProduct(data))
-        .catch((err) => setError(String(err)))
-      .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, products]);
 
   if (loading) return <p>Cargando producto...</p>;
   if (error) return <p>Error: {error}</p>;
