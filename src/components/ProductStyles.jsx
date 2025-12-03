@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const ProductGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px; /* Aumentar el espacio para que no se vea apretado */
+  max-width: 800px; /* Limitar el ancho máximo para centrar */
+  margin: 0 auto; /* Centrar el grid horizontalmente */
 `;
 
 export const ProductCard = styled.div`
