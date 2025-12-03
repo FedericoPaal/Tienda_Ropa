@@ -58,6 +58,17 @@ body {
   padding: 12px 20px;
   background: rgb(68, 128, 196);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  position: relative; /* Needed for absolute positioning of mobile menu */
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.navbar-brand a {
+  text-decoration: none;
+  color: #ffffff;
 }
 
 .navbar a:hover {
@@ -70,6 +81,24 @@ body {
   margin-right: 12px;
   text-decoration: none;
   color: #ffffff;
+  padding: 8px 12px; /* Add padding for better click area */
+  display: inline-flex; /* Align icon and text */
+  align-items: center;
+  gap: 5px; /* Space between icon and text */
+}
+
+.hamburger-menu {
+  display: none; /* Hidden by default on larger screens */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
 }
 
 /* ====== HOME ====== */
@@ -208,9 +237,61 @@ button:hover {
     order: 2;
   }
 
+  /* Navbar responsive adjustments */
   .navbar {
+    flex-wrap: wrap; /* Allow items to wrap */
+  }
+
+  .navbar-brand {
+    flex-grow: 1; /* Allow brand to take available space */
+  }
+
+  .hamburger-menu {
+    display: block; /* Show hamburger on small screens */
+  }
+
+  .nav-links {
     flex-direction: column;
-    gap: 6px;
+    width: 100%;
+    display: none; /* Hide by default */
+    background: rgb(68, 128, 196); /* Same as navbar background */
+    position: absolute;
+    top: 100%; /* Position below navbar */
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
+  }
+
+  .nav-links.open {
+    display: flex; /* Show when open */
+  }
+
+  .nav-left, .nav-right {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-left a, .nav-right a, .nav-right button {
+    margin: 5px 0;
+    width: fit-content; /* Adjust width for stacked items */
+    align-self: center; /* Center items when stacked */
+  }
+
+  .nav-right button {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__title {
+    font-size: 1.6rem;
+  }
+
+  .hero {
+    height: 45vh;
+
   }
 }
 
@@ -271,16 +352,6 @@ button:hover {
   font-weight: 700;
 }
 
-@media (max-width: 600px) {
-  .hero__title {
-    font-size: 1.6rem;
-  }
-
-  .hero {
-    height: 45vh;
-
-  }
-}
 
 /* ====== ADMIN ====== */
 .admin-container {
