@@ -39,27 +39,47 @@ const Admin = () => {
   };
 
   return (
-    <div>
+    <div className="admin-container">
       <h2>Administración de Productos</h2>
-      <AddProduct />
-      <hr />
-      <h3>Lista de Productos</h3>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            {product.title} - ${product.price}
-            <button onClick={() => openEditModal(product)} aria-label={`Editar producto ${product.title}`}>Editar</button>
-            <button onClick={() => openDeleteModal(product)} aria-label={`Eliminar producto ${product.title}`}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
+      
+      <div className="admin-section">
+        <AddProduct />
+      </div>
+
+      <div className="admin-section">
+        <h3>Lista de Productos</h3>
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.title}</td>
+                <td>${product.price}</td>
+                <td className="actions-cell">
+                  <button onClick={() => openEditModal(product)} className="edit-btn" aria-label={`Editar producto ${product.title}`}>Editar</button>
+                  <button onClick={() => openDeleteModal(product)} className="delete-btn" aria-label={`Eliminar producto ${product.title}`}>Eliminar</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       <Modal isOpen={isDeleteModalOpen} onClose={closeDeleteModal}>
         <h3>Confirmar Eliminación</h3>
         <p>
           ¿Estás seguro de que deseas eliminar el producto "{productToDelete?.title}"?
         </p>
-        <button onClick={handleDelete}>Confirmar</button>
-        <button onClick={closeDeleteModal}>Cancelar</button>
+        <div className="modal-actions">
+          <button onClick={handleDelete} className="delete-btn">Confirmar</button>
+          <button onClick={closeDeleteModal} className="cancel-btn">Cancelar</button>
+        </div>
       </Modal>
 
       {productToEdit && (
