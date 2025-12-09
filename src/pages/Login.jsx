@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+import PageLayout from '../components/PageLayout';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,28 +19,29 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
+    <PageLayout title="Iniciar Sesión">
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-group">
+          <label>Usuario</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Ingresa tu usuario"
           />
         </div>
-        <div>
-          <label>Password</label>
+        <div className="form-group">
+          <label>Contraseña</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Ingresa tu contraseña"
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="submit-btn">Iniciar Sesión</button>
       </form>
-    </div>
+    </PageLayout>
   );
 };
 

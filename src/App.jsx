@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -15,11 +15,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
     <AuthProvider>
       <CartProvider>
         <ProductProvider>
-          <div className="app-container">
+          <div className={`app-container ${isHome ? 'home-full' : ''}`}>
             <ToastContainer />
             <Navbar />
             <main className="main">

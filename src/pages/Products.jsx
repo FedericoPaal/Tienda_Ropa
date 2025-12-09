@@ -5,6 +5,7 @@ import { CartContext } from '../contexts/CartContext';
 import Search from '../components/Search';
 import Pagination from '../components/Pagination';
 import SEO from '../components/SEO';
+import PageLayout from '../components/PageLayout';
 import { ProductGrid, ProductCard } from '../components/ProductStyles'; // Import styled components
 
 export default function Products() {
@@ -29,20 +30,19 @@ export default function Products() {
   };
 
   if (loading) {
-    return <div>Cargando productos...</div>;
+    return <PageLayout title="Productos"><div>Cargando productos...</div></PageLayout>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <PageLayout title="Productos"><div>{error}</div></PageLayout>;
   }
 
   return (
-    <section className="products">
+    <PageLayout title="Productos">
       <SEO
         title="Productos - Mi E-commerce"
         description="Explora nuestro catálogo de productos."
       />
-      <h2>Productos</h2>
       <Search setSearchTerm={setSearchTerm} />
       <ProductGrid>
         {currentProducts.map((p) => (
@@ -62,6 +62,6 @@ export default function Products() {
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
-    </section>
+    </PageLayout>
   );
 }

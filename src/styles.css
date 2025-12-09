@@ -23,8 +23,7 @@ body {
   min-height: 8vh;
 }
 
-/* Cuando la app esté en la home, permitir que el main ocupe todo el ancho
-   y el hero pueda usar el espacio completo. */
+/* Cuando la app esté en la home, permitir que el main ocupe todo el ancho */
 .app-container.home-full {
   grid-template-columns: 1fr; /* quitar la columna del aside */
 }
@@ -39,7 +38,9 @@ body {
 }
 
 .main {
-  padding: 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-aside {
@@ -127,6 +128,58 @@ body {
   text-align: center;
   color: #143b79;
   margin-bottom: 20px;
+}
+
+/* ====== LOGIN FORM ====== */
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #143b79;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #358585;
+  box-shadow: 0 0 0 3px rgba(53, 133, 133, 0.1);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background: #358585;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: #0b8f8f;
 }
 
 
@@ -295,11 +348,40 @@ button:hover {
   }
 }
 
-/* ====== HERO ====== */
+/* ====== PAGE LAYOUT ====== */
+.page-layout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-layout.full-width {
+  min-height: calc(100vh - 60px); /* Restar altura del navbar */
+}
+
+.page-header {
+  width: 100%;
+  padding: 24px;
+  background: #f5f7fa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.page-header h1,
+.page-header h2 {
+  color: #143b79;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.page-main {
+  flex: 1;
+  width: 100%;
+  padding: 24px;
+}
 .hero {
   position: relative;
-  height: 100vh;
-  width: 188vh;
+  width: 100%;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
