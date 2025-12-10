@@ -47,12 +47,22 @@ export default function Products() {
       <ProductGrid>
         {currentProducts.map((p) => (
           <ProductCard key={p.id}>
-            <img src={p.image} alt={p.title} />
-            <h3>{p.title}</h3>
-            <p>${p.price}</p>
-            <div className="buttons">
-              <button onClick={() => addToCart(p)} aria-label={`Agregar ${p.title} al carrito`}>Agregar</button>
-              <button><Link to={`/products/${p.id}`} aria-label={`Ver detalles de ${p.title}`}>Ver detalles</Link></button>
+            <div className="image-container">
+              <img src={p.image} alt={p.title} />
+            </div>
+            <div className="content">
+              <h3>{p.title}</h3>
+              <div className="price-section">
+                <p className="price">${parseFloat(p.price).toFixed(2)}</p>
+              </div>
+              <div className="buttons">
+                <button onClick={() => addToCart(p)} aria-label={`Agregar ${p.title} al carrito`}>
+                  🛒 Agregar
+                </button>
+                <button aria-label={`Ver detalles de ${p.title}`}>
+                  <Link to={`/products/${p.id}`}>👁️ Ver</Link>
+                </button>
+              </div>
             </div>
           </ProductCard>
         ))}
