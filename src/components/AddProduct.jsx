@@ -6,18 +6,35 @@ const AddProduct = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
+  const [imagePreview, setImagePreview] = useState('');
   const [error, setError] = useState('');
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Crear URL local para previsualizar
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+        setImage(reader.result); // Guardar como base64
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || price <= 0 || description.length < 10) {
-      setError('Por favor, complete todos los campos correctamente.');
+    if (!name || price <= 0 || description.length < 10 || !image) {
+      setError('Por favor, complete todos los campos correctamente e incluya una imagen.');
       return;
     }
-    addProduct({ title: name, price, description });
+    addProduct({ title: name, price, description, image });
     setName('');
     setPrice('');
     setDescription('');
+    setImage('');
+    setImagePreview('');
     setError('');
   };
 
@@ -31,6 +48,7 @@ const AddProduct = () => {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Nombre del producto"
           />
         </div>
         <div>
@@ -39,6 +57,9 @@ const AddProduct = () => {
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            placeholder="Ej: 99.99"
+            step="0.01"
+            min="0"
           />
         </div>
         <div>
@@ -46,10 +67,26 @@ const AddProduct = () => {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            placeholder="Descripción del producto (mínimo 10 caracteres)"
           ></textarea>
         </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Agregar</button>
+        <div>
+          <label>Imagen del Producto</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="image-input"
+          />
+          {imagePreview && (
+            <div className="image-preview">
+              <img src={imagePreview} alt="Vista previa del producto" />
+              <p>Imagen cargada correctamente</p>
+            </div>
+          )}
+        </div>
+        {error && <p className="error-message">{error}</p>}
+        <button type="submit">Agregar Producto</button>
       </form>
     </div>
   );
